@@ -188,9 +188,9 @@ const quizData = [
         // O texto original é 'Qual é o foco principal dos livros de 1 e 2 Crônicas?'
         text: 'Qual é o foco principal dos livros de 1 e 2 Crônicas?',
         // Resposta exata: 'Um registro genealógico e histórico que foca no reinado de Davi e na linhagem de Judá'
-        answer: 'Um registro genealógico e histórico que foca no reinado de Davi e na linhagem de Judá',
+        answer: 'Um resumo de todos os livros históricos da bíblia',
         options: [
-          'Um registro genealógico e histórico que foca no reinado de Davi e na linhagem de Judá',
+          'Um resumo de todos os livros históricos da bíblia',
           'Uma coleção de poemas e cânticos de adoração',
           'Profecias sobre a vinda do Messias',
           'As cartas escritas por Paulo às igrejas',
