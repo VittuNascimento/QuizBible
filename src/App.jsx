@@ -226,8 +226,7 @@ function App() {
   const [score, setScore] = useState(0);
   const [showResults, setShowResults] = useState(false);
   const [userAnswers, setUserAnswers] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [explanation, setExplanation] = useState('');
+  // O estado 'loading' e 'explanation' foram removidos.
   const [isAnswered, setIsAnswered] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -248,7 +247,7 @@ function App() {
     setScore(0);
     setShowResults(false);
     setUserAnswers({});
-    setExplanation('');
+    // 'setExplanation' foi removido.
     setIsAnswered(false);
     setSelectedOption(null);
   };
@@ -284,46 +283,7 @@ function App() {
     }, 1000); // Espera 1 segundo para mostrar o feedback visual
   };
 
-  const getAnswerExplanation = async () => {
-    if (!selectedBook) return;
-    setLoading(true);
-    const questionsToUse = selectedBook.questions;
-    const question = questionsToUse[currentQuestionIndex];
-    // Ajusta o prompt para incluir o livro e a pergunta com a redação original
-    const userQuery = `Forneça uma explicação detalhada sobre a resposta correta para a pergunta do livro de ${question.book}: "${question.text}". A resposta correta é "${question.answer}". Inclua o contexto histórico e sua relevância.`;
-    const prompt = {
-      contents: [{ parts: [{ text: userQuery }] }],
-    };
-
-    console.log('Iniciando requisição para obter explicação...');
-    const apiKey = "";
-    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-
-    try {
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(prompt),
-      });
-
-      if (!response.ok) {
-        console.error('Resposta da API não OK:', response.status, response.statusText);
-        throw new Error(`Chamada da API falhou: ${response.status} ${response.statusText}`);
-      }
-
-      const result = await response.json();
-      console.log('Resposta da API recebida:', result);
-
-      const text = result.candidates[0].content.parts[0].text;
-      setExplanation(text);
-    } catch (error) {
-      console.error("Erro ao obter explicação:", error);
-      setExplanation("Não foi possível obter a explicação. Tente novamente mais tarde.");
-    } finally {
-      setLoading(false);
-      console.log('Processo de obtenção de explicação concluído.');
-    }
-  };
+  // A função getAnswerExplanation foi removida.
 
   const getResultsComponent = () => {
     const questionsToUse = selectedBook.questions;
@@ -418,21 +378,7 @@ function App() {
               );
             })}
           </div>
-          <div className="mt-6 flex flex-col items-center w-full">
-            <button
-              onClick={getAnswerExplanation}
-              className="mt-4 px-4 py-2 bg-indigo-500 text-white rounded-full font-medium text-sm hover:bg-indigo-600 transition-all shadow-sm disabled:bg-indigo-300"
-              disabled={loading}
-            >
-              {loading ? 'Carregando Explicação...' : 'Obter Explicação ✨'}
-            </button>
-            {explanation && (
-              <div className="mt-4 p-4 text-sm bg-gray-100 rounded-lg text-gray-700 max-h-40 overflow-y-auto w-full">
-                <p className="font-semibold text-indigo-800 mb-1">Explicação:</p>
-                <p>{explanation}</p>
-              </div>
-            )}
-          </div>
+          {/* O botão e o div de explicação foram removidos daqui */}
         </div>
       </div>
     );
